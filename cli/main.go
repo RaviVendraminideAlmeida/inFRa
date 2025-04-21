@@ -1,11 +1,20 @@
 package main
 
 import (
-    "os"
-    "context"
-    "github.com/urfave/cli/v3"
+	"cli/flags"
+	"log"
+	"os"
+
+	"github.com/urfave/cli/v2"
 )
 
 func main() {
-    (&cli.Command{}).Run(context.Background(), os.Args)
+
+	app := &cli.App{
+		Flags: flags.GetAvailableFlags(),
+	}
+
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 }
