@@ -1,7 +1,8 @@
 package main
 
 import (
-	"cli/flags"
+	"cli/commands"
+	"cli/commands/flags"
 	"log"
 	"os"
 
@@ -11,7 +12,9 @@ import (
 func main() {
 
 	app := &cli.App{
-		Flags: flags.GetAvailableFlags(),
+		Name:     "infra",
+		Flags:    flags.GetGlobalFlags(),
+		Commands: commands.GetAllCommands(),
 	}
 
 	if err := app.Run(os.Args); err != nil {
